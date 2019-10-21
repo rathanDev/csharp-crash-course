@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections;
+using System.Collections.Generic;
 
 namespace StudentManager
 {
@@ -181,14 +182,31 @@ namespace StudentManager
                     course.Code, course.Description);
             }
 
+            IDictionary<string, int> marksDict = new Dictionary<string, int>();
+
             Console.WriteLine("\n Enrolments");
             foreach (Enrolment enrolment in enrolments)
             {
                 Console.WriteLine("Enrolment studentIndex:{0} courseCode:{1} marks:{2}",
                     enrolment.StudentIndex, enrolment.CourseCode, enrolment.Marks);
+
+                int totalMarks = 0;
+                if(marksDict.TryGetValue(enrolment.StudentIndex, out totalMarks)) 
+                {
+                    totalMarks = totalMarks + enrolment.Marks;
+                } 
+                else
+                {
+                    totalMarks = enrolment.Marks;
+                }
+                marksDict[enrolment.StudentIndex] = totalMarks;
             }
 
-
+            Console.WriteLine("\n Summary");
+            foreach(KeyValuePair<string, int> item in marksDict)
+            {
+                Console.WriteLine("Student {0} totalMarks:{1}", item.Key, item.Value);
+            }
 
         }
     }
