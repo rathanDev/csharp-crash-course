@@ -6,9 +6,15 @@ namespace StudentManager
 {
     class Enrolment
     {
-        int studentIndex;
-        int courseId;
-        DateTime enrolledDate;
-        int marks;
+        private string studentIndex;
+        private string courseCode;
+        private DateTime enrolledDate;
+        private int marks;
+
+        public string StudentIndex { get; set; }
+        public string CourseCode { get; set; }
+        public DateTime EnrolledDate { get; set; }
+        public int Marks { get; set; }
+    
     }
 }

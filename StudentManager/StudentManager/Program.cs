@@ -11,6 +11,7 @@ namespace StudentManager
 
             ArrayList students = new ArrayList();
             ArrayList courses = new ArrayList();
+            ArrayList enrolments = new ArrayList();
 
             while (true)
             {
@@ -65,6 +66,48 @@ namespace StudentManager
                 courses.Add(course);
             }
 
+            while (true)
+            {
+                Console.WriteLine("\n\nAdd Enrolments");
+                Console.WriteLine("Enter n to view the summary\n");
+
+                Console.Write("Enter student index number: ");
+                string studentIndex = Console.ReadLine();
+                if (studentIndex.Equals("n"))
+                {
+                    break;
+                }
+                Console.WriteLine("Index number: {0} ", studentIndex);
+
+                Console.Write("Enter course code: ");
+                string courseCode = Console.ReadLine();
+                Console.WriteLine("Course code: {0}", courseCode);
+
+                int marks = 0;
+                bool validMarks = false;
+                do
+                {
+                    Console.Write("Enter Marks: ");
+                    string marksInString = Console.ReadLine();
+                    validMarks = Int32.TryParse(marksInString, out marks);
+                    if(!validMarks)
+                    {
+                        Console.WriteLine("Please enter a valid marks");
+                    }
+                }
+                while (!validMarks);
+
+                Console.WriteLine("Marks: {0}", marks);
+
+                Enrolment enrolment = new Enrolment();
+                enrolment.StudentIndex = studentIndex;
+                enrolment.CourseCode = courseCode;
+                enrolment.Marks = marks;
+
+                enrolments.Add(enrolment);
+            }
+
+
             Console.WriteLine("\n Registered students");
             foreach (Student student in students)
             {
@@ -77,6 +120,13 @@ namespace StudentManager
             {
                 Console.WriteLine("Course code:{0} description:{1}",
                     course.Code, course.Description);
+            }
+
+            Console.WriteLine("\n Enrolments");
+            foreach (Enrolment enrolment in enrolments)
+            {
+                Console.WriteLine("Enrolment studentIndex:{0} courseCode:{1} marks:{2}",
+                    enrolment.StudentIndex, enrolment.CourseCode, enrolment.Marks);
             }
 
         }
