@@ -16,12 +16,28 @@ namespace StudentManager
             while (true)
             {
                 Console.WriteLine("\n\nEnter student details");
-                Console.WriteLine("Enter n to move to next step \n");
+                Console.WriteLine("n-next p-populate\n");
 
                 Console.Write("Enter index number: ");
                 string indexNumber = Console.ReadLine();
                 if (indexNumber.Equals("n"))
                 {
+                    break;
+                }
+                if (indexNumber.Equals("p"))
+                {
+                    Student s1 = new Student();
+                    s1.IndexNumber = "s1";
+                    s1.FirstName = "s1";
+                    s1.LastName = "s1";
+                    students.Add(s1);
+
+                    Student s2 = new Student();
+                    s2.IndexNumber = "s2";
+                    s2.FirstName = "s2";
+                    s2.LastName = "s2";
+                    students.Add(s2);
+
                     break;
                 }
                 Console.WriteLine("Index number: {0} ", indexNumber);
@@ -45,7 +61,7 @@ namespace StudentManager
             while (true)
             {
                 Console.WriteLine("\n\nEnter course details");
-                Console.WriteLine("Enter n to move to next step \n");
+                Console.WriteLine("n-next p-populate \n");
 
                 Console.Write("Enter Course code: ");
                 string code = Console.ReadLine();
@@ -53,6 +69,21 @@ namespace StudentManager
                 {
                     break;
                 }
+                if (code.Equals("p"))
+                {
+                    Course c1 = new Course();
+                    c1.Code = "c1";
+                    c1.Description = "c1";
+                    courses.Add(c1);
+
+                    Course c2 = new Course();
+                    c2.Code = "c2";
+                    c2.Description = "c2";
+                    courses.Add(c2);
+
+                    break;
+                }
+
                 Console.WriteLine("Course code: {0}", code);
 
                 Console.Write("Enter course description: ");
@@ -69,12 +100,40 @@ namespace StudentManager
             while (true)
             {
                 Console.WriteLine("\n\nAdd Enrolments");
-                Console.WriteLine("Enter n to view the summary\n");
+                Console.WriteLine("n-next p-populate\n");
 
                 Console.Write("Enter student index number: ");
                 string studentIndex = Console.ReadLine();
                 if (studentIndex.Equals("n"))
                 {
+                    break;
+                }
+                if (studentIndex.Equals("p"))
+                {
+                    Enrolment e1 = new Enrolment();
+                    e1.StudentIndex = "s1";
+                    e1.CourseCode = "c1";
+                    e1.Marks = 1;
+                    enrolments.Add(e1);
+
+                    Enrolment e11 = new Enrolment();
+                    e11.StudentIndex = "s1";
+                    e11.CourseCode = "c2";
+                    e11.Marks = 12;
+                    enrolments.Add(e11);
+
+                    Enrolment e2 = new Enrolment();
+                    e2.StudentIndex = "s2";
+                    e2.CourseCode = "c1";
+                    e2.Marks = 2;
+                    enrolments.Add(e2);
+
+                    Enrolment e22 = new Enrolment();
+                    e22.StudentIndex = "s2";
+                    e22.CourseCode = "c2";
+                    e22.Marks = 22;
+                    enrolments.Add(e22);
+
                     break;
                 }
                 Console.WriteLine("Index number: {0} ", studentIndex);
@@ -128,6 +187,8 @@ namespace StudentManager
                 Console.WriteLine("Enrolment studentIndex:{0} courseCode:{1} marks:{2}",
                     enrolment.StudentIndex, enrolment.CourseCode, enrolment.Marks);
             }
+
+
 
         }
     }
