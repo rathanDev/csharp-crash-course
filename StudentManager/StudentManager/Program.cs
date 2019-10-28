@@ -8,18 +8,35 @@ namespace StudentManager
     {
         static void Main(string[] args)
         {
-            Console.WriteLine("Hello, this is *Student Manager* \n\n\n");
+            Console.WriteLine("*** Student Manager *** \n\n");
 
             ArrayList students = new ArrayList();
             ArrayList courses = new ArrayList();
             ArrayList enrolments = new ArrayList();
 
+            const string enterStudentDetailsLabel = "Enter student details";
+            const string nextOrPopulateLabel = "(n-next p-populate)";
+            const string enterStudentIndexLabel = "Enter index number: ";
+            const string enterFirstNameLabel = "Enter first name: ";
+            const string enterLastNameLabel = "Enter last name: ";
+            const string enterCourseDetailsLabel = "Enter course details";
+            const string enterCourseCodeLabel = "Enter Course code: ";
+            const string enterCourseDescriptionLabel = "Enter course description: ";
+            const string addEnrollmentsLabel = "Add Enrollments";
+            const string enterMarksLabel = "Enter Marks: ";
+            const string enterValidMarksLabel = "Please enter a valid marks";
+            const string registeredStudentsLabel = "Registered students";
+            const string availableCoursesLabel = "Available courses";
+            const string enrollmentsLabel = "Enrolments";
+            const string summaryLabel = "Summary";
+            const string splitLabel = "------------------------------------------------------------------------------";
+
             while (true)
             {
-                Console.WriteLine("\n\nEnter student details");
-                Console.WriteLine("n-next p-populate\n");
+                Console.WriteLine("\n\n" + enterStudentDetailsLabel);
+                Console.WriteLine(nextOrPopulateLabel);
 
-                Console.Write("Enter index number: ");
+                Console.Write(enterStudentIndexLabel);
                 string indexNumber = Console.ReadLine();
                 if (indexNumber.Equals("n"))
                 {
@@ -43,11 +60,11 @@ namespace StudentManager
                 }
                 Console.WriteLine("Index number: {0} ", indexNumber);
 
-                Console.Write("Enter first name: ");
+                Console.Write(enterFirstNameLabel);
                 string firstName = Console.ReadLine();
                 Console.WriteLine("First name: {0}", firstName);
 
-                Console.Write("Enter last name: ");
+                Console.Write(enterLastNameLabel);
                 string lastName = Console.ReadLine();
                 Console.WriteLine("Last name: {0}", lastName);
 
@@ -61,10 +78,10 @@ namespace StudentManager
 
             while (true)
             {
-                Console.WriteLine("\n\nEnter course details");
-                Console.WriteLine("n-next p-populate \n");
+                Console.WriteLine("\n\n" + enterCourseDetailsLabel);
+                Console.WriteLine(nextOrPopulateLabel);
 
-                Console.Write("Enter Course code: ");
+                Console.Write(enterCourseCodeLabel);
                 string code = Console.ReadLine();
                 if (code.Equals("n"))
                 {
@@ -87,7 +104,7 @@ namespace StudentManager
 
                 Console.WriteLine("Course code: {0}", code);
 
-                Console.Write("Enter course description: ");
+                Console.Write(enterCourseDescriptionLabel);
                 string description = Console.ReadLine();
                 Console.WriteLine("Course description: {0}", description);
 
@@ -100,10 +117,10 @@ namespace StudentManager
 
             while (true)
             {
-                Console.WriteLine("\n\nAdd Enrolments");
-                Console.WriteLine("n-next p-populate\n");
+                Console.WriteLine("\n\n" + addEnrollmentsLabel);
+                Console.WriteLine(nextOrPopulateLabel);
 
-                Console.Write("Enter student index number: ");
+                Console.Write(enterStudentIndexLabel);
                 string studentIndex = Console.ReadLine();
                 if (studentIndex.Equals("n"))
                 {
@@ -139,7 +156,7 @@ namespace StudentManager
                 }
                 Console.WriteLine("Index number: {0} ", studentIndex);
 
-                Console.Write("Enter course code: ");
+                Console.Write(enterCourseCodeLabel);
                 string courseCode = Console.ReadLine();
                 Console.WriteLine("Course code: {0}", courseCode);
 
@@ -147,12 +164,12 @@ namespace StudentManager
                 bool validMarks = false;
                 do
                 {
-                    Console.Write("Enter Marks: ");
+                    Console.Write(enterMarksLabel);
                     string marksInString = Console.ReadLine();
                     validMarks = Int32.TryParse(marksInString, out marks);
                     if(!validMarks)
                     {
-                        Console.WriteLine("Please enter a valid marks");
+                        Console.WriteLine(enterValidMarksLabel);
                     }
                 }
                 while (!validMarks);
@@ -167,15 +184,16 @@ namespace StudentManager
                 enrolments.Add(enrolment);
             }
 
+            Console.WriteLine("\n" + splitLabel + "\n");
 
-            Console.WriteLine("\n Registered students");
+            Console.WriteLine("\n" + registeredStudentsLabel);
             foreach (Student student in students)
             {
                 Console.WriteLine("Student index:{0} firstName:{1} lastName:{2}",
                     student.IndexNumber, student.FirstName, student.LastName);
             }
 
-            Console.WriteLine("\n Available courses");
+            Console.WriteLine("\n" + availableCoursesLabel);
             foreach (Course course in courses)
             {
                 Console.WriteLine("Course code:{0} description:{1}",
@@ -184,7 +202,7 @@ namespace StudentManager
 
             IDictionary<string, int> marksDict = new Dictionary<string, int>();
 
-            Console.WriteLine("\n Enrolments");
+            Console.WriteLine("\n" + enrollmentsLabel);
             foreach (Enrolment enrolment in enrolments)
             {
                 Console.WriteLine("Enrolment studentIndex:{0} courseCode:{1} marks:{2}",
@@ -202,7 +220,7 @@ namespace StudentManager
                 marksDict[enrolment.StudentIndex] = totalMarks;
             }
 
-            Console.WriteLine("\n Summary");
+            Console.WriteLine("\n" + summaryLabel);
             foreach(KeyValuePair<string, int> item in marksDict)
             {
                 Console.WriteLine("Student {0} totalMarks:{1}", item.Key, item.Value);
