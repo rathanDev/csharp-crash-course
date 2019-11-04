@@ -16,7 +16,7 @@ namespace StudentManager
 
             const string enterStudentDetailsLabel = "Enter student details";
             const string nextOrPopulateLabel = "(n-next p-populate)";
-            const string enterStudentIndexLabel = "Enter index number: ";
+            const string enterStudentIndexLabel = "Enter student index number: ";
             const string enterFirstNameLabel = "Enter first name: ";
             const string enterLastNameLabel = "Enter last name: ";
             const string enterCourseDetailsLabel = "Enter course details";
@@ -29,11 +29,13 @@ namespace StudentManager
             const string availableCoursesLabel = "Available courses";
             const string enrollmentsLabel = "Enrolments";
             const string summaryLabel = "Summary";
-            const string splitLabel = "------------------------------------------------------------------------------";
+            const string errorInvalidStudentIndex = "Error: Please enter a valid student index number";
+            const string errorInvalidCourse = "Error: Invalid course code";
+            const string splitLabel = "----------------------------------------------------";
 
             while (true)
             {
-                Console.WriteLine("\n\n" + enterStudentDetailsLabel);
+                Console.WriteLine(enterStudentDetailsLabel);
                 Console.WriteLine(nextOrPopulateLabel);
 
                 Console.Write(enterStudentIndexLabel);
@@ -44,16 +46,10 @@ namespace StudentManager
                 }
                 if (indexNumber.Equals("p"))
                 {
-                    Student s1 = new Student();
-                    s1.IndexNumber = "s1";
-                    s1.FirstName = "s1";
-                    s1.LastName = "s1";
+                    Student s1 = new Student("s1", "s1f1", "s1l1");
                     students.Add(s1);
 
-                    Student s2 = new Student();
-                    s2.IndexNumber = "s2";
-                    s2.FirstName = "s2";
-                    s2.LastName = "s2";
+                    Student s2 = new Student("s2", "s2f1", "s2l1");
                     students.Add(s2);
 
                     break;
@@ -62,16 +58,11 @@ namespace StudentManager
 
                 Console.Write(enterFirstNameLabel);
                 string firstName = Console.ReadLine();
-                Console.WriteLine("First name: {0}", firstName);
 
                 Console.Write(enterLastNameLabel);
                 string lastName = Console.ReadLine();
-                Console.WriteLine("Last name: {0}", lastName);
-
-                Student student = new Student();
-                student.IndexNumber = indexNumber;
-                student.FirstName = firstName;
-                student.LastName = lastName;
+              
+                Student student = new Student(indexNumber, firstName, lastName);
 
                 students.Add(student);
             }
@@ -89,29 +80,19 @@ namespace StudentManager
                 }
                 if (code.Equals("p"))
                 {
-                    Course c1 = new Course();
-                    c1.Code = "c1";
-                    c1.Description = "c1";
+                    Course c1 = new Course("c1", "c1d");
                     courses.Add(c1);
 
-                    Course c2 = new Course();
-                    c2.Code = "c2";
-                    c2.Description = "c2";
+                    Course c2 = new Course("c2", "c2d");
                     courses.Add(c2);
 
                     break;
                 }
 
-                Console.WriteLine("Course code: {0}", code);
-
                 Console.Write(enterCourseDescriptionLabel);
                 string description = Console.ReadLine();
-                Console.WriteLine("Course description: {0}", description);
 
-                Course course = new Course();
-                course.Code = code;
-                course.Description = description;
-
+                Course course = new Course(code, description);
                 courses.Add(course);
             }
 
@@ -121,7 +102,9 @@ namespace StudentManager
                 Console.WriteLine(nextOrPopulateLabel);
 
                 Console.Write(enterStudentIndexLabel);
+
                 string studentIndex = Console.ReadLine();
+                
                 if (studentIndex.Equals("n"))
                 {
                     break;
@@ -154,11 +137,20 @@ namespace StudentManager
 
                     break;
                 }
-                Console.WriteLine("Index number: {0} ", studentIndex);
+                if (!students.Contains(new Student(studentIndex)))
+                {
+                    Console.WriteLine(errorInvalidStudentIndex);
+                    continue;
+                }
 
                 Console.Write(enterCourseCodeLabel);
                 string courseCode = Console.ReadLine();
-                Console.WriteLine("Course code: {0}", courseCode);
+
+                if (!courses.Contains(new Course(courseCode)))
+                {
+                    Console.WriteLine(errorInvalidCourse);
+                    continue;
+                }
 
                 int marks = 0;
                 bool validMarks = false;
@@ -184,7 +176,7 @@ namespace StudentManager
                 enrolments.Add(enrolment);
             }
 
-            Console.WriteLine("\n" + splitLabel + "\n");
+            Console.WriteLine("\n" + splitLabel);
 
             Console.WriteLine("\n" + registeredStudentsLabel);
             foreach (Student student in students)
@@ -225,6 +217,8 @@ namespace StudentManager
             {
                 Console.WriteLine("Student {0} totalMarks:{1}", item.Key, item.Value);
             }
+
+            Console.WriteLine("\n" + splitLabel);
 
         }
     }
