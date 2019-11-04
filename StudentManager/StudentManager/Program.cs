@@ -8,14 +8,13 @@ namespace StudentManager
     {
         static void Main(string[] args)
         {
-            Console.WriteLine("*** Student Manager *** \n\n");
-
+            
             ArrayList students = new ArrayList();
             ArrayList courses = new ArrayList();
             ArrayList enrolments = new ArrayList();
 
             const string enterStudentDetailsLabel = "Enter student details";
-            const string nextOrPopulateLabel = "(n-next p-populate)";
+            const string nextOrPopulateLabel = "       (n-next p-populate)";
             const string enterStudentIndexLabel = "Enter student index number: ";
             const string enterFirstNameLabel = "Enter first name: ";
             const string enterLastNameLabel = "Enter last name: ";
@@ -32,11 +31,13 @@ namespace StudentManager
             const string errorInvalidStudentIndex = "Error: Please enter a valid student index number";
             const string errorInvalidCourse = "Error: Invalid course code";
             const string splitLabel = "----------------------------------------------------";
+            const string welcomeLabel = "*** ---------- Student Manager ---------- ***";
+
+            Console.WriteLine(welcomeLabel + "\n\n");
 
             while (true)
             {
-                Console.WriteLine(enterStudentDetailsLabel);
-                Console.WriteLine(nextOrPopulateLabel);
+                Console.WriteLine("\n" + enterStudentDetailsLabel + nextOrPopulateLabel);
 
                 Console.Write(enterStudentIndexLabel);
                 string indexNumber = Console.ReadLine();
@@ -54,7 +55,6 @@ namespace StudentManager
 
                     break;
                 }
-                Console.WriteLine("Index number: {0} ", indexNumber);
 
                 Console.Write(enterFirstNameLabel);
                 string firstName = Console.ReadLine();
@@ -69,8 +69,7 @@ namespace StudentManager
 
             while (true)
             {
-                Console.WriteLine("\n\n" + enterCourseDetailsLabel);
-                Console.WriteLine(nextOrPopulateLabel);
+                Console.WriteLine("\n\n" + enterCourseDetailsLabel + nextOrPopulateLabel);
 
                 Console.Write(enterCourseCodeLabel);
                 string code = Console.ReadLine();
@@ -98,8 +97,7 @@ namespace StudentManager
 
             while (true)
             {
-                Console.WriteLine("\n\n" + addEnrollmentsLabel);
-                Console.WriteLine(nextOrPopulateLabel);
+                Console.WriteLine("\n\n" + addEnrollmentsLabel + nextOrPopulateLabel);
 
                 Console.Write(enterStudentIndexLabel);
 
